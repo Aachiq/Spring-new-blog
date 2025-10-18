@@ -17,5 +17,32 @@ public class CategoryService {
 	public List<Category> getAllCategories() {
 		 return categoryRepository.findAll();
 	}
+	
+	// Get category by ID (returns null if not found)
+    public Category getCategoryById(Long id) {
+        Category foundCategory = null;
+
+        if(categoryRepository.existsById(id)) {
+            foundCategory = categoryRepository.findById(id).get();
+        }
+
+        // You can now use foundCategory for other processing before returning
+        return foundCategory; // returns null if not found
+    }
+    
+    // Get category by Name (returns null if not found)
+    public Category getCategoryByName(String name) {
+        return categoryRepository.findByName(name);
+    }
+    
+    // keep also this syntax store result in variable to check in null++
+    //public Category getCategoryByName(String name) {
+    //    Category foundCategory = categoryRepository.findByName(name);
+    //    return foundCategory; // will be null if not found
+    //}
+    
+    public Long getCountCategories() {
+    	return categoryRepository.count();
+    }
     
 }
